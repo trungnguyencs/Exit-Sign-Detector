@@ -1,1 +1,1 @@
-python model_main.py --alsologtostderr --model_dir=training/ --pipeline_config_path=pre-trained-model/ssd_inception_v2_coco.config
+python model_main.py --alsologtostderr --model_dir=ckpt/ --pipeline_config_path=pre-trained-model/ssd_inception_v2_coco.config

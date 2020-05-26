@@ -22,9 +22,9 @@ from collections import namedtuple, OrderedDict
 
 flags = tf.app.flags
 
-# flags.DEFINE_string('csv_input', '../data/csv/quadrilateral-train.csv', 'Path to the CSV input')
-# flags.DEFINE_string('output_path', '../data/record/quadrilateral-train.record', 'Path to output TFRecord')
-# flags.DEFINE_string('image_dir', '../data/images/train/', 'Path to images')
+flags.DEFINE_string('csv_input', '../data/csv/quadrilateral-train.csv', 'Path to the CSV input')
+flags.DEFINE_string('output_path', '../data/record/train.record', 'Path to output TFRecord')
+flags.DEFINE_string('image_dir', '../data/images/train/', 'Path to images')
 
 # flags.DEFINE_string('csv_input', '../data/csv/quadrilateral-test.csv', 'Path to the CSV input')
 # flags.DEFINE_string('output_path', '../data/record/test.record', 'Path to output TFRecord')
