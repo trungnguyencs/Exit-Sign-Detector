@@ -160,4 +160,55 @@ print(tf.__version__)
 print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 ```
 
+## Install the following necessary packages
+```
+conda install pillow, lxml, jupyter, matplotlib, opencv, cython
+```
+or 
+```
+pip install pillow
+pip install lxml
+pip install jupyter
+pip install matplotlib
+pip install cython
+pip install opencv-python
+```
+(opencv-python instead of opencv)
 
+## Install object detection package
+Install the Tensorflow\models\research\object_detection package by running the following from Tensorflow\models\research:
+```
+# From within TensorFlow/models/research/
+pip install .
+```
+
+## Add research/slim to your PYTHONPATH
+```
+# From within tensorflow/models/research/
+export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research/slim
+```
+
+## Install Protobuf
+* Head to the protoc releases page: https://github.com/google/protobuf/releases
+* Download the latest protoc-*-*.zip release
+* Extract the contents of the downloaded protoc-*-*.zip in a directory TensorFlow/Protobuf
+* Extract the contents of the downloaded protoc-*-*.zip, inside TensorFlow/Protobuf
+* Add to your Path environment variable:
+  ```
+  export PATH=/home/trung/TensorFlow/Protobuf/bin:$PATH
+  ```
+* In a new Terminal, cd into TensorFlow/models/research/ directory and run the following command: 
+  ```
+  # From within TensorFlow/models/research/ 
+  protoc object_detection/protos/*.proto --python_out=.
+  ```
+
+## Install COCO API (Optional)
+* The pycocotools package should be installed if you are interested in using COCO evaluation metrics, as discussed in Evaluating the Model (Optional).
+* Download cocoapi to a directory of your choice, then make and copy the pycocotools subfolder to the Tensorflow/models/research directory, as such:
+```
+git clone https://github.com/cocodataset/cocoapi.git
+cd cocoapi/PythonAPI
+make
+cp -r pycocotools <PATH_TO_TF>/TensorFlow/models/research/
+```
