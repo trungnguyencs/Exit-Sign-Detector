@@ -6,13 +6,13 @@
 5. [Run the program](README.md#Run-the-program)
 
 # Introduction
-This program calculates the distance from a camera to an exit sign in real-life, given the image containing the exit sign taken by the camera and coordinates of its four corners, together with the sign dimensions and the camera intrinsic parameters.
-
-This program serves two purposes. First, this distance estimation model placed on top of a deep learning model, which assuming can accurately segment the four corners of the sign automatically, would be able to calculate the distance from the exit sign to the camera. Second, this distance estimation model works as a “labeler”: given a large dataset of exit sign images, with this model, we can obtain the exit sign distance from each image and feed it into a deep learning model that detects exit signs and predicts its distance from regression learning.
+This program takes an image taken indoor as input and uses an SSD-inception deep neural network to predict whether there is an exit sign and where it locates in the image (with a confidence level between 0-1). This is a part of a vision-based indoor navigation system for the blinds developed by CVLab lead by professor Roberto Manduchi at UC Santa Cruz.
 
 Demo image:
 
 ![alt text](https://github.com/trungnguyencs/Exit-Sign-Detector/blob/master/git_img/demo.png)
+
+![alt text](https://github.com/trungnguyencs/Exit-Sign-Detector/blob/master/git_img/loss.png)
 
 # Directory
 ```
