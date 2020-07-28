@@ -12,6 +12,9 @@ Demo image:
 
 ![alt text](https://github.com/trungnguyencs/Exit-Sign-Detector/blob/master/git_img/demo.png)
 
+
+Training loss plot with respect to the number of training steps:
+
 ![alt text](https://github.com/trungnguyencs/Exit-Sign-Detector/blob/master/git_img/loss.png)
 
 # Directory
