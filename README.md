@@ -106,6 +106,8 @@ pip install --ignore-installed --upgrade tensorflow==1.14
 
 ## Install Tensorflow GPU:
 ### Install CUDA v10.0
+Note that Tensorflow 1.14 is only compatible with CUDA 10.0, so in order to run this program, you will need to install this version of CUDA.
+In addition, our lab already has CUDA 10.2 installed so you may have to change the ```$PATH``` in ```~/.bashrc``` so that it runs CUDA 10.0 and not CUDA 10.2.
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
@@ -152,7 +154,7 @@ conda activate tfgpu
 pip install --upgrade tensorflow-gpu==1.14
 ```
 
-### Test
+### Test to see if the installation was successful:
 Run python
 ```
 import tensorflow as tf
