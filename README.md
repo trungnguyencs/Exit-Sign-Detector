@@ -1,22 +1,18 @@
  # Table of Contents
 1. [Introduction](README.md#Introduction)
 2. [Directory](README.md#Directory)
-2. [Program structure](README.md#Directory-structure)
-3. [Setup](README.md#Setup)
-4. [Run the program](README.md#Run-the-program)
+3. [Program structure](README.md#Program-structure)
+4. [Setup](README.md#Setup)
+5. [Run the program](README.md#Run-the-program)
 
 # Introduction
 This program calculates the distance from a camera to an exit sign in real-life, given the image containing the exit sign taken by the camera and coordinates of its four corners, together with the sign dimensions and the camera intrinsic parameters.
 
 This program serves two purposes. First, this distance estimation model placed on top of a deep learning model, which assuming can accurately segment the four corners of the sign automatically, would be able to calculate the distance from the exit sign to the camera. Second, this distance estimation model works as a “labeler”: given a large dataset of exit sign images, with this model, we can obtain the exit sign distance from each image and feed it into a deep learning model that detects exit signs and predicts its distance from regression learning.
 
-# Requirements
-Requires Python 2.7 and the following python libraries:
-* numpy
-* cv2
-* json
-* glob
-* yaml
+Demo image:
+
+![alt text](https://github.com/trungnguyencs/Exit-Sign-Detector/blob/master/git_img/demo.png"Title")
 
 # Directory
 ```
@@ -31,9 +27,12 @@ Requires Python 2.7 and the following python libraries:
 │   │   ├── quadrilateral-1787.csv
 │   │   ├── quadrilateral-test.csv
 │   │   └── quadrilateral-train.csv
-│   └── images
-│       └── test
-│           └── (some jpg images)
+│   ├── images
+│   │   └── test
+│   │       └── (some jpg images)
+│   └── records
+│       ├── train.record
+│       └── test.record
 ├── export-inference-graph
 │   ├── ckpt
 │   │   ├── model.ckpt-5715.data-00000-of-00001
@@ -80,9 +79,20 @@ Requires Python 2.7 and the following python libraries:
 ```
 
 # Program structure
-## Main files
-## Data
-## Other folders:
+* ```run.sh```: run this script and it will run ```model_main.py``` with some specified parameters to start training the DNN
+* ```annotations```: containing ```label_map.pbtxt```, which is where you specify the number of classes (in our case there's only 1 class) and the classes' names
+* ```ckpt```: the check point data files generated during the training process
+* ```data```: containing:
+  - ```records```: containing the ```train.record``` and ```test.record```. These are the data used to train our model
+  - ```csv```: containing the csv data files, which were used to generate the above ```.record``` files using the python script in ```preprocessing/generate_tfrecord.py```
+  - ```images```: here I only store test images so that they can be used to test and demo the working DNN using the ```exit_sign_detector_demo.ipynb``` file in ```test_model```
+* ```export-inference-graph```: containing the ```run_export.sh``` which runs the ```export_inference_graph.py``` (with some specified parameters) in order to generate an inference graph (which is used to predict the labels in ```exit_sign_detector_demo.ipynb```) from a checkpoint generated during the training process
+* ```preprocessing```: containing: 
+  - ```split_train_test.ipynb``` to remdomly split the data to training set + testing set (ratio 80/20) and save them to the csv files in ```data/csv```
+  - ```generate_tfrecord.py``` to convert the csv files to ```.record``` files
+* ```pre-trained-model```: containing the downloaded pre-trained model so that we can use transfer learning and not having to train our exit sign detector from scratch
+* ```results```: containing the result predicted images. Confident 0.01 means that the images show all the labels which have confidence >= 1 percent
+* ```test_model```: the ```exit_sign_detector_demo.ipynb``` runs the exported inference graph and makes detector prediction. It uses the images in ```data/images/test``` and write the results to ```results```
 
 # Setup
 ## Install pip + Anaconda
@@ -216,4 +226,38 @@ make
 cp -r pycocotools <PATH_TO_TF>/TensorFlow/models/research/
 ```
 
+## Your ```~/.bashrc``` file
+
+After all the installation above, my ```~/.bashrc``` looks like this. Copied it here for your reference:
+
+```
+# export PATH=/home/trung/anaconda3/bin:$PATH
+export PATH=/home/trung/TensorFlow/Protobuf/bin:$PATH
+export PYTHONPATH=$PYTHONPATH:/home/trung/TensorFlow/models/research/slim
+export CUDA_HOME=/usr/local/cuda-10.0
+export PATH=/usr/local/cuda-10.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:$LD_LIBRARY_PATH
+# export PATH=/usr/local/cuda/bin:$PATH
+# export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+```
+
 # Run the program
+Please refer to this page regarding how to run the program:
+
+https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/training.html
+
+It shows you how to:
+* Organise your workspace/training files
+* Prepare/annotate image datasets
+* Generate tf records from such datasets
+* Configure a simple training pipeline
+* Train a model and monitor it’s progress
+* Export the resulting model and use it to detect objects
+
+You should follow all the steps listed above, EXCEPT the ```Annotate image datasets``` part, since we did not use their tool ```labelImg``` to annotate the images as we used ```LabelBox``` instead.
+
+I have also written a script that converts the json data file to the correct csv file formatted correctly so that it can be comsumed directly by their python ```generate_tfrecord.py``` script. You can find my code here:
+
+https://github.com/trungnguyencs/Exit-Sign-Distance-Measurement/blob/master/preprocessing/json_to_csv.py
+
+Hope that this setup tutorial saves your some time. Good luck!
