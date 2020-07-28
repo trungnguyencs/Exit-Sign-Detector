@@ -12,7 +12,7 @@ This program serves two purposes. First, this distance estimation model placed o
 
 Demo image:
 
-![alt text](https://github.com/trungnguyencs/Exit-Sign-Detector/tree/master/git_img.png)
+![alt text](https://github.com/trungnguyencs/Exit-Sign-Detector/blob/master/git_img/demo.png)
 
 # Directory
 ```
