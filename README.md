@@ -1,8 +1,9 @@
  # Table of Contents
-1. [Introduction](README.md#introduction)
-1. [Directory structure](README.md#directory-structure)
-1. [Program structure](README.md#program-structure)
-1. [Run the code](README.md#run-the-code)
+1. [Introduction](README.md#Introduction)
+2. [Directory](README.md#Directory)
+2. [Program structure](README.md#Directory-structure)
+3. [Setup](README.md#Setup)
+4. [Run the program](README.md#Run-the-program)
 
 # Introduction
 This program calculates the distance from a camera to an exit sign in real-life, given the image containing the exit sign taken by the camera and coordinates of its four corners, together with the sign dimensions and the camera intrinsic parameters.
@@ -17,7 +18,7 @@ Requires Python 2.7 and the following python libraries:
 * glob
 * yaml
 
-# Directory structure
+# Directory
 ```
 ├── annotations
 │   └── label_map.pbtxt
@@ -83,7 +84,7 @@ Requires Python 2.7 and the following python libraries:
 ## Data
 ## Other folders:
 
-# Installation
+# Setup
 ## Install pip + Anaconda
 * Install pip:
 ```
@@ -106,8 +107,8 @@ pip install --ignore-installed --upgrade tensorflow==1.14
 
 ## Install Tensorflow GPU:
 ### Install CUDA v10.0
-Note that Tensorflow 1.14 is only compatible with CUDA 10.0, so in order to run this program, you will need to install this version of CUDA.
-In addition, our lab already has CUDA 10.2 installed so you may have to change the ```$PATH``` in ```~/.bashrc``` so that it runs CUDA 10.0 and not CUDA 10.2.
+Note that Tensorflow 1.14 is only compatible with CUDA 10.0, so in order to run this program, you need to install this version of CUDA.
+In addition, our lab already has CUDA 10.2 installed so you may have to change the ```$PATH``` in ```~/.bashrc``` so that it runs CUDA 10.0 instead of CUDA 10.2.
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
@@ -214,3 +215,5 @@ cd cocoapi/PythonAPI
 make
 cp -r pycocotools <PATH_TO_TF>/TensorFlow/models/research/
 ```
+
+# Run the program
